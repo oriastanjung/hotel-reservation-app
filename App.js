@@ -7,6 +7,7 @@ import { store } from "./src/store/store";
 import { Provider } from "react-redux";
 import Home from "./src/pages/Home/Home";
 import DetailPage from "./src/pages/DetailPage/DetailPage";
+import BookingPage from "./src/pages/BookingPage/BookingPage";
 import { persistStore } from "redux-persist";
 
 const Stack = createNativeStackNavigator();
@@ -20,6 +21,7 @@ export default function App() {
           <Stack.Navigator initialRouteName={"Home"}>
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="Details" component={DetailPage} />
+            <Stack.Screen name="Booking Page" component={BookingPage} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

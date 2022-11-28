@@ -1,10 +1,17 @@
-import { View, Text } from "react-native";
+import { View, Text, TextInput } from "react-native";
 import React from "react";
-
-const InputWithLabel = () => {
+import styles from "./InputWithLabel.styles";
+const InputWithLabel = (props) => {
   return (
-    <View>
-      <Text>InputWithLabel</Text>
+    <View style={styles.inputGroup}>
+      <Text style={styles.label}>{props.label} : </Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={props.onChangeText}
+        value={props.value}
+        placeholder={props.placeholder}
+        keyboardType={props.type}
+      />
     </View>
   );
 };
