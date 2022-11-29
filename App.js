@@ -12,7 +12,8 @@ import BookingPage from "./src/pages/BookingPage/BookingPage";
 import BookingHistoryPage from "./src/pages/BookingHistoryPage/BookingHistoryPage";
 import ProfilePage from "./src/pages/ProfilePage/ProfilePage";
 import LoginPage from "./src/pages/LoginPage/LoginPage";
-
+import HomeScreen from "./src/pages/HomeScreen/HomeScreen";
+import SearchScreen from "./src/pages/SearchScreen/SearchScreen";
 const Stack = createNativeStackNavigator();
 const persistor = persistStore(store);
 
@@ -35,6 +36,16 @@ export default function App() {
               component={BookingHistoryPage}
             />
             <Stack.Screen name="Profile Page" component={ProfilePage} />
+            <Stack.Screen
+              name="Home Screen Page"
+              component={HomeScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Search Screen Page"
+              component={SearchScreen}
+              options={{ headerShown: false }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

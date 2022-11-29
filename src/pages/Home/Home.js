@@ -10,6 +10,14 @@ const Home = ({ navigation }) => {
         onPress={() => navigation.navigate("Login Page")}
       />
       <Button
+        title="Go to Home Screen Page"
+        onPress={() => navigation.navigate("Home Screen Page")}
+      />
+      <Button
+        title="Go to Search Screen Page"
+        onPress={() => navigation.navigate("Search Screen Page")}
+      />
+      <Button
         title="Go to Booking Page"
         onPress={() => navigation.navigate("Booking Page")}
       />
