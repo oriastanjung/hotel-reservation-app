@@ -11,6 +11,7 @@ import DetailPage from "./src/pages/DetailPage/DetailPage";
 import BookingPage from "./src/pages/BookingPage/BookingPage";
 import BookingHistoryPage from "./src/pages/BookingHistoryPage/BookingHistoryPage";
 import ProfilePage from "./src/pages/ProfilePage/ProfilePage";
+import LoginPage from "./src/pages/LoginPage/LoginPage";
 
 const Stack = createNativeStackNavigator();
 const persistor = persistStore(store);
@@ -22,6 +23,11 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator initialRouteName={"Home"}>
             <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen
+              name="Login Page"
+              component={LoginPage}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen name="Details" component={DetailPage} />
             <Stack.Screen name="Booking Page" component={BookingPage} />
             <Stack.Screen
