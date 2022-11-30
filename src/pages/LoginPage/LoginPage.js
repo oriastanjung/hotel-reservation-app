@@ -3,7 +3,7 @@ import Svg, { Path, Defs, LinearGradient, Stop } from "react-native-svg";
 import ButtonGradient from "../../components/ButtonGradient/ButtonGradient";
 import styles from "./LoginPage.styles";
 import { StatusBar } from "expo-status-bar";
-const LoginPage = () => {
+const LoginPage = ({ navigation }) => {
   function SvgTop() {
     return (
       <Svg
@@ -58,7 +58,10 @@ const LoginPage = () => {
         <Text style={styles.subTitle}>Sign in to your account</Text>
         <TextInput placeholder="user@gmail.com" style={styles.textInput} />
         <TextInput placeholder="password" style={styles.textInput} />
-        <ButtonGradient text={"SIGN IN"} />
+        <ButtonGradient
+          text={"SIGN IN"}
+          onPress={() => navigation.navigate("Home Screen Page")}
+        />
         <StatusBar style="auto" />
       </View>
     </ScrollView>

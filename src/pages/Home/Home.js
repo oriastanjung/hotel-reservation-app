@@ -1,6 +1,6 @@
 import * as React from "react";
 import { View, Button, Text } from "react-native";
-
+import BottomNavbar from "../../components/BottomNavbar/BottomNavbar";
 const Home = ({ navigation }) => {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -8,6 +8,10 @@ const Home = ({ navigation }) => {
       <Button
         title="Go to Login Page"
         onPress={() => navigation.navigate("Login Page")}
+      />
+      <Button
+        title="Go to Detail Page"
+        onPress={() => navigation.navigate("Details")}
       />
       <Button
         title="Go to Home Screen Page"
@@ -29,6 +33,7 @@ const Home = ({ navigation }) => {
         title="Go to Profile Page"
         onPress={() => navigation.navigate("Profile Page")}
       />
+      <BottomNavbar />
     </View>
   );
 };

@@ -5,6 +5,8 @@ import InputWithLabel from "../../components/InputWithLabel/InputWithLabel";
 import Button from "../../components/Button/Button";
 import styles from "./ProfilePage.styles";
 import useProfilePage from "./useProfilePage";
+import BottomNavbar from "../../components/BottomNavbar/BottomNavbar";
+
 const ProfilePage = ({ navigation }) => {
   const {
     emailState,
@@ -16,41 +18,48 @@ const ProfilePage = ({ navigation }) => {
     handleChangeAccountData,
   } = useProfilePage(navigation);
   return (
-    <View style={styles.section}>
-      <ProfileCard>
-        <Text style={styles.sectionTitle}>My Account</Text>
-        <View>
-          <InputWithLabel
-            label={"Firstname"}
-            placeholder={"Input your Firstname"}
-            value={firstNameState}
-            onChangeText={setfirstNameState}
-          />
-          <InputWithLabel
-            label={"Lastname"}
-            placeholder={"Input your Lastname"}
-            value={lastNameState}
-            onChangeText={setlastNameState}
-          />
-          <InputWithLabel
-            label={"Email"}
-            placeholder={"Input your Email"}
-            value={emailState}
-            onChangeText={setemailState}
-          />
-        </View>
-        <View style={styles.change}>
+    <>
+      <View style={styles.section}>
+        <ProfileCard>
+          <Text style={styles.sectionTitle}>My Account</Text>
+          <View>
+            <InputWithLabel
+              label={"Firstname"}
+              placeholder={"Input your Firstname"}
+              value={firstNameState}
+              onChangeText={setfirstNameState}
+            />
+            <InputWithLabel
+              label={"Lastname"}
+              placeholder={"Input your Lastname"}
+              value={lastNameState}
+              onChangeText={setlastNameState}
+            />
+            <InputWithLabel
+              label={"Email"}
+              placeholder={"Input your Email"}
+              value={emailState}
+              onChangeText={setemailState}
+            />
+          </View>
+          <View style={styles.change}>
+            <Button
+              onPress={handleChangeAccountData}
+              text={"Change Profile Detail"}
+              isPrimary
+            />
+          </View>
+        </ProfileCard>
+        <View style={styles.btn}>
           <Button
-            onPress={handleChangeAccountData}
-            text={"Change Profile Detail"}
-            isPrimary
+            text={"Logout"}
+            isWarning
+            onPress={() => navigation.navigate("Login Page")}
           />
         </View>
-      </ProfileCard>
-      <View style={styles.btn}>
-        <Button text={"Logout"} isWarning />
       </View>
-    </View>
+      <BottomNavbar />
+    </>
   );
 };
 

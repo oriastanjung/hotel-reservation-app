@@ -11,7 +11,7 @@ import styles from "./Card.styles";
 const { width } = Dimensions.get("screen");
 const cardWidth = width / 1.8;
 
-const Card = ({ hotel, index, activeCardIndex, scrollX }) => {
+const Card = ({ hotel, index, activeCardIndex, scrollX, onPress }) => {
   // const [activeCardIndex, setActiveCardIndex] = React.useState(0);
   // const scrollX = React.useRef(new Animated.Value(0)).current;
   const inputRange = [
@@ -33,7 +33,8 @@ const Card = ({ hotel, index, activeCardIndex, scrollX }) => {
     <TouchableOpacity
       disabled={activeCardIndex != index}
       activeOpacity={1}
-      onPress={() => navigation.navigate("Search Screen", hotel)}
+      // onPress={() => navigation.navigate("Search Screen", hotel)}
+      onPress={onPress}
     >
       <Animated.View style={{ ...styles.card, transform: [{ scale }] }}>
         <Animated.View style={{ ...styles.cardOverLay, opacity }} />

@@ -11,7 +11,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import styles from "./ButtonGradient.styles";
 export default function ButtonGradient(props) {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={props.onPress}>
       <LinearGradient
         colors={["#7FE9DE", "#FF3CBD"]}
         start={{ x: 0, y: 0 }}

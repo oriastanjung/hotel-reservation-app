@@ -1,12 +1,13 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Pressable } from "react-native";
 import React from "react";
 import styles from "./TopHotelCard.styles";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../../consts/color";
 
-const TopHotelCard = ({ hotel }) => {
+const TopHotelCard = (props) => {
+  const { hotel } = props;
   return (
-    <View style={styles.topHotelCard}>
+    <Pressable style={styles.topHotelCard} onPress={props.onPress}>
       <View
         style={{
           position: "absolute",
@@ -30,7 +31,7 @@ const TopHotelCard = ({ hotel }) => {
           {hotel.location}
         </Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

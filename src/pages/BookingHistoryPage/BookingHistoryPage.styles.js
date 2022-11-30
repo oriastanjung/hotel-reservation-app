@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
   },
   section: {
     flex: 1,
+    marginBottom: 40,
   },
 });
 

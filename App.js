@@ -14,6 +14,7 @@ import ProfilePage from "./src/pages/ProfilePage/ProfilePage";
 import LoginPage from "./src/pages/LoginPage/LoginPage";
 import HomeScreen from "./src/pages/HomeScreen/HomeScreen";
 import SearchScreen from "./src/pages/SearchScreen/SearchScreen";
+// import BottomNavbar from "./src/components/BottomNavbar/BottomNavbar";
 const Stack = createNativeStackNavigator();
 const persistor = persistStore(store);
 
@@ -22,14 +23,18 @@ export default function App() {
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName={"Home"}>
+          <Stack.Navigator initialRouteName={"Login Page"}>
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen
               name="Login Page"
               component={LoginPage}
               options={{ headerShown: false }}
             />
-            <Stack.Screen name="Details" component={DetailPage} />
+            <Stack.Screen
+              name="Details"
+              component={DetailPage}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen name="Booking Page" component={BookingPage} />
             <Stack.Screen
               name="Booking History Page"
@@ -47,6 +52,7 @@ export default function App() {
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
+          {/* <BottomNavbar /> */}
         </NavigationContainer>
       </PersistGate>
     </Provider>
