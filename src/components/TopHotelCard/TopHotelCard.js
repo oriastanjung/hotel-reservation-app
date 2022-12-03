@@ -3,11 +3,18 @@ import React from "react";
 import styles from "./TopHotelCard.styles";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../../consts/color";
-
+import { useNavigation } from "@react-navigation/native";
 const TopHotelCard = (props) => {
   const { hotel } = props;
+  const navigation = useNavigation();
+  const handleOnPress = () => {
+    navigation.navigate("Details", {
+      hotelid_ppn: hotel.hotelid_ppn,
+    });
+  };
+  console.log("props >> ", props);
   return (
-    <Pressable style={styles.topHotelCard} onPress={props.onPress}>
+    <Pressable style={styles.topHotelCard} onPress={handleOnPress}>
       <View
         style={{
           position: "absolute",
@@ -21,14 +28,17 @@ const TopHotelCard = (props) => {
         <Text
           style={{ color: colors.primary, fontWeight: "bold", fontSize: 15 }}
         >
-          5.0
+          {hotel.star_rating}
         </Text>
       </View>
-      <Image style={styles.topHotelCardImage} source={hotel.image} />
+      <Image
+        style={styles.topHotelCardImage}
+        source={{ uri: `https://${hotel.thumbnail}` }}
+      />
       <View style={{ paddingVertical: 5, paddingHorizontal: 10 }}>
         <Text style={{ fontSize: 10, fontWeight: "bold" }}>{hotel.name}</Text>
         <Text style={{ fontSize: 7, fontWeight: "bold", color: colors.grey }}>
-          {hotel.location}
+          {hotel.address.city_name}
         </Text>
       </View>
     </Pressable>

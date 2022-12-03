@@ -6,7 +6,7 @@ import BookingHistoryItems from "../../components/BookingHistoryItems/BookingHis
 import styles from "./BookingHistoryPage.styles";
 import BottomNavbar from "../../components/BottomNavbar/BottomNavbar";
 const BookingHistoryPage = () => {
-  const { name, email, dummyData } = useBookingHistoryPage();
+  const { name, email, data } = useBookingHistoryPage();
 
   const renderItem = ({ item }) => <BookingHistoryItems data={item} />;
 
@@ -25,7 +25,7 @@ const BookingHistoryPage = () => {
           </View>
         </View>
         <FlatList
-          data={dummyData}
+          data={data}
           renderItem={renderItem}
           keyExtractor={(item) => item.hotelid_ppn}
         />

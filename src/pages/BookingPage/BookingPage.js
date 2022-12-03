@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, Alert } from "react-native";
 import React from "react";
 import InputWithLabel from "../../components/InputWithLabel/InputWithLabel";
 import InputDate from "../../components/InputDate/InputDate";
@@ -7,7 +7,7 @@ import BookingSummaryCard from "../../components/BookingSummaryCard/BookingSumma
 import ButtonComponent from "../../components/Button/Button";
 import styles from "./BookingPage.styles";
 import BottomNavbar from "../../components/BottomNavbar/BottomNavbar";
-
+import { useRoute } from "@react-navigation/native";
 const BookingPage = ({ navigation }) => {
   const {
     endDate,
@@ -30,8 +30,30 @@ const BookingPage = ({ navigation }) => {
     setphone,
     setroom,
     days,
+    handleAddToBookingHistory,
   } = useBookingPage();
-
+  const route = useRoute();
+  const { hotelid_ppn, price, rooms, hotelData } = route.params;
+  console.log("hotel_data : ", hotelData);
+  const CheckoutHandler = () => {
+    Alert.alert(
+      "Checkout Now?",
+      `You will be book hotel of ${hotelData.name} for ${days} days with Total Price $${price}`,
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Canceled"),
+          style: "cancel",
+        },
+        {
+          text: "Checkout Now",
+          onPress: () => {
+            handleAddToBookingHistory(hotelData);
+          },
+        },
+      ]
+    );
+  };
   return (
     <>
       <ScrollView style={styles.container}>
@@ -89,16 +111,16 @@ const BookingPage = ({ navigation }) => {
             <BookingSummaryCard
               days={days}
               guest={people}
-              room={room}
+              room={rooms}
               fullname={fullname}
               phone={phone}
-              price={15.55}
+              price={price}
             />
           </View>
           <ButtonComponent
             text={"Checkout"}
             isPrimary
-            onPress={() => navigation.navigate("Home")}
+            onPress={CheckoutHandler}
           />
         </View>
       </ScrollView>

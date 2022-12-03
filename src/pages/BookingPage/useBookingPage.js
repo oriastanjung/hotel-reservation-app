@@ -1,5 +1,10 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  resetData,
+  addToData,
+} from "../../store/reducer/bookingHistorySlice/bookingHistorySlice";
+import { useNavigation } from "@react-navigation/native";
 const useBookingPage = () => {
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
@@ -51,6 +56,16 @@ const useBookingPage = () => {
     showMode("time");
   };
 
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(resetData());
+  // }, []);
+  const navigation = useNavigation();
+  const handleAddToBookingHistory = (hotel_data) => {
+    console.log("habis klik ini hotel data >>> ", hotel_data);
+    dispatch(addToData(hotel_data));
+    navigation.navigate("Booking History Page");
+  };
   return {
     startDate,
     endDate,
@@ -75,6 +90,7 @@ const useBookingPage = () => {
     room,
     people,
     days,
+    handleAddToBookingHistory,
   };
 };
 

@@ -1,5 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchHotelsIndonesia,
+  fetchHotelsPopular,
+} from "../../store/reducer/hotelsSlice/hotelsSlice";
 
+import { useNavigation } from "@react-navigation/native";
 const useHomeScreen = () => {
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
@@ -12,8 +18,9 @@ const useHomeScreen = () => {
   const [phone, setphone] = useState(0);
   const [room, setroom] = useState(3);
   const [people, setpeople] = useState(0);
+  const [location, setLocation] = useState("");
   const days = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24);
-
+  const navigation = useNavigation();
   const onChangeStartDate = (event, selectedDate) => {
     const currentDate = selectedDate;
     setShowStart(false);
@@ -51,6 +58,34 @@ const useHomeScreen = () => {
     showMode("time");
   };
 
+  const dispatch = useDispatch();
+  const { hotelsIndonesia, hotelsPopular } = useSelector(
+    (state) => state.hotels
+  );
+  // const hotels = Object.values(hotelsIndonesia);
+  // const [hotels, setHotels] = useState([]);
+  const hotels = hotelsIndonesia;
+  // const popular = hotelsPopular.filter((item) => item.star_rating >= 4);
+  const popular = hotelsIndonesia.filter((item) => item.star_rating >= 4);
+  // const popular = hotelsIndonesia;
+  useEffect(() => {
+    dispatch(fetchHotelsIndonesia());
+    // console.log(hotel);
+    // Object.keys(hotel).forEach(function (key, index) {});
+  }, []);
+
+  // useEffect(() => {
+  //   dispatch(fetchHotelsPopular());
+  // }, []);
+  const handleToSearch = () => {
+    console.log("start date >> ", startDate.toLocaleString());
+    console.log("end date >> ", endDate.toLocaleString());
+    navigation.navigate("Search Screen Page", {
+      checkin: startDate,
+      checkout: endDate,
+      query: location,
+    });
+  };
   return {
     startDate,
     endDate,
@@ -75,6 +110,11 @@ const useHomeScreen = () => {
     room,
     people,
     days,
+    hotels,
+    popular,
+    location,
+    setLocation,
+    handleToSearch,
   };
 };
 

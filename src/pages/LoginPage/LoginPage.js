@@ -3,6 +3,7 @@ import Svg, { Path, Defs, LinearGradient, Stop } from "react-native-svg";
 import ButtonGradient from "../../components/ButtonGradient/ButtonGradient";
 import styles from "./LoginPage.styles";
 import { StatusBar } from "expo-status-bar";
+import useLoginPage from "./useLoginPage";
 const LoginPage = ({ navigation }) => {
   function SvgTop() {
     return (
@@ -48,6 +49,8 @@ const LoginPage = ({ navigation }) => {
       </Svg>
     );
   }
+  const { email, password, setEmail, setPassword, handleLogin, err } =
+    useLoginPage();
   return (
     <ScrollView style={styles.mainContainer}>
       <View style={styles.containerSVG}>
@@ -56,14 +59,33 @@ const LoginPage = ({ navigation }) => {
       <View style={styles.container}>
         <Text style={styles.title}>Hello</Text>
         <Text style={styles.subTitle}>Sign in to your account</Text>
-        <TextInput placeholder="user@gmail.com" style={styles.textInput} />
-        <TextInput placeholder="password" style={styles.textInput} />
-        <ButtonGradient
-          text={"SIGN IN"}
-          onPress={() => navigation.navigate("Home Screen Page")}
+        <TextInput
+          placeholder="user@gmail.com"
+          style={styles.textInput}
+          value={email}
+          onChangeText={setEmail}
         />
+        <TextInput
+          placeholder="password"
+          style={styles.textInput}
+          value={password}
+          onChangeText={setPassword}
+        />
+        <ButtonGradient text={"SIGN IN"} onPress={handleLogin} />
         <StatusBar style="auto" />
       </View>
+      {err && (
+        <Text
+          style={{
+            color: "red",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+          }}
+        >
+          {err}
+        </Text>
+      )}
     </ScrollView>
   );
 };

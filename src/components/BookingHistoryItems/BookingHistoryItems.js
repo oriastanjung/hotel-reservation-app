@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./BookingHistoryItems.styles";
 import useBookingHistoryItems from "./useBookingHistoryItems";
 const BookingHistoryItems = (props) => {
-  const { dataFetch } = useBookingHistoryItems(props.data.hotelid_ppn);
+  // const { dataFetch } = useBookingHistoryItems(props.data.hotelid_ppn);
   return (
     <View style={styles.card}>
       <Image
@@ -12,21 +12,21 @@ const BookingHistoryItems = (props) => {
         source={{ uri: `https:${props.data.thumbnail}` }}
       />
       <View style={styles.info}>
-        <Text style={styles.infoTitle}>{props.data.hotel_name}</Text>
-        {dataFetch && (
+        <Text style={styles.infoTitle}>{props.data.name}</Text>
+        {props.data && (
           <>
             <Text style={styles.infoAddress}>
-              {dataFetch.address.address_line_one}
+              {props.data.address.address_line_one}
             </Text>
             <Text style={styles.infoDesc}>
-              {dataFetch.hotel_description.substring(0, 30) + "..."}
+              {props.data.hotel_description.substring(0, 30) + "..."}
             </Text>
           </>
         )}
       </View>
-      {dataFetch && (
+      {props.data && (
         <View style={styles.rate}>
-          <Text style={styles.rateText}>Rate : {dataFetch.review_rating}</Text>
+          <Text style={styles.rateText}>Rate : {props.data.review_rating}</Text>
         </View>
       )}
     </View>

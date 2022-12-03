@@ -21,8 +21,9 @@ import ButtonComponent from "../../components/Button/Button";
 import hotels from "../../consts/hotels";
 import style from "./SearchScreen.styles";
 import BottomNavbar from "../../components/BottomNavbar/BottomNavbar";
+import CardSearch from "../../components/CardSearch/CardSearch";
 const SearchScreen = ({ navigation, route }) => {
-  const item = route.params;
+  const { checkin, checkout, query } = route.params;
   const [activeCardIndex, setActiveCardIndex] = React.useState(0);
   const scrollX = React.useRef(new Animated.Value(0)).current;
   const {
@@ -37,135 +38,87 @@ const SearchScreen = ({ navigation, route }) => {
     setPressed,
     showDatepickerEnd,
     showDatepickerStart,
-  } = useSearchScreen();
+    hotelSearch,
+  } = useSearchScreen(route.params);
   return (
     <>
+      {hotelSearch && console.log("hotel searched >>> ", hotelSearch)}
       <ScrollView
         contentContainerStyle={{
           backgroundColor: colors.white,
-          paddingBottom: 50,
-          paddingTop: 25,
+          flex: 1,
+
+          // marginVertical: "30%",
         }}
         style={{ marginBottom: 45 }}
       >
-        <View style={style.searcInput}>
+        <View style={{ marginTop: "15%", marginLeft: "10%", marginBottom: 15 }}>
+          <Text style={{ fontSize: 20, fontFamily: "sans-serif-medium" }}>
+            Result Searched Page
+          </Text>
+        </View>
+        {/* <View style={style.searcInput}>
           <Ionicons name="search" size={30} style={{ marginLeft: 20 }} />
           <TextInput
             placeholder="Where Do You Want To go ?"
             style={{ fontSize: 20, paddingLeft: 10 }}
           />
-        </View>
+        </View> */}
 
-        <InputDate
+        {/* <InputDate
           label={"Check In"}
           date={startDate}
           mode={mode}
           show={showStart}
           onChange={onChangeStartDate}
           showDatepicker={showDatepickerStart}
-        />
+        /> */}
 
-        <InputDate
+        {/* <InputDate
           label={"Check Out"}
           date={endDate}
           mode={mode}
           show={showEnd}
           onChange={onChangeEndDate}
           showDatepicker={showDatepickerEnd}
-        />
+        /> */}
 
-        <View style={style.guestInput}>
+        {/* <View style={style.guestInput}>
           <Ionicons name="person-outline" style={{ margin: 20 }} size={30} />
           <TextInput
             placeholder="Guest ?"
             style={{ fontSize: 18, paddingLeft: 10 }}
           />
-          {/* <Ionicons name="arrow-up" style={{ margin:10 }} size={30}/>
-        <Ionicons name="arrow-down" style={{ margin:10 }} size={30}/> */}
-        </View>
-        <ImageBackground
-          style={style.headerImage}
-          // source={item.image}
-        >
-          <View style={style.header}>
-            <Ionicons
-              name="arrow-back"
-              size={28}
-              color={colors.primary}
-              onPress={navigation.goBack}
-            />
-            <Ionicons name="heart-circle" size={28} color={colors.primary} />
-          </View>
-        </ImageBackground>
-
-        <View>
-          <View style={style.iconContainer}>
-            <MaterialIcons name="place" color={colors.white} size={28} />
-          </View>
-
-          <View style={{ marginTop: 20, paddingHorizontal: 20 }}>
-            <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-              {/* {item.name} */}
-            </Text>
-            <Text
-              style={{
-                fontSize: 12,
-                fontWeight: "400",
-                color: colors.grey,
-                marginTop: 5,
-              }}
-            >
-              {/* {item.location} */}
-            </Text>
-            <View
-              style={{
-                marginTop: 5,
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <View style={{ flexDirection: "row" }}>
-                <View style={{ flexDirection: "row" }}>
-                  <MaterialIcons name="star" size={20} color={colors.orange} />
-                  <MaterialIcons name="star" size={20} color={colors.orange} />
-                  <MaterialIcons name="star" size={20} color={colors.orange} />
-                  <MaterialIcons name="star" size={20} color={colors.orange} />
-                  <MaterialIcons name="star" size={20} color={colors.grey} />
-                </View>
-                <Text
-                  style={{ fontWeight: "bold", fontSize: 16, marginLeft: 5 }}
-                >
-                  4.0
-                </Text>
-              </View>
-            </View>
-          </View>
-          <View
-            style={{
-              marginTop: 20,
-              flexDirection: "row",
-              justifyContent: "space-between",
+        </View> */}
+        {hotelSearch && (
+          <FlatList
+            data={hotelSearch}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{
               paddingLeft: 20,
-              alignItems: "center",
+              marginTop: 20,
+              paddingBottom: 30,
             }}
-          >
-            <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-              Price Per Night
-            </Text>
-            <View style={style.priceTag}>
-              <Text
-                style={{
-                  fontSize: 20,
-                  fontWeight: "bold",
-                  color: colors.grey,
-                  marginLeft: 5,
-                }}
-              >
-                {/* $ {item.price} */}
-              </Text>
-            </View>
-          </View>
-        </View>
+            renderItem={({ item }) => (
+              <CardSearch
+                data={item}
+                checkin={startDate.toLocaleString()}
+                checkout={endDate.toLocaleString()}
+                onPress={() =>
+                  navigation.navigate("Details", {
+                    hotelid_ppn: item.hotelid_ppn,
+                  })
+                }
+              />
+            )}
+          />
+        )}
+        {!hotelSearch && (
+          <Text style={{ textAlign: "center", marginVertical: "50%" }}>
+            No Data Found
+          </Text>
+        )}
       </ScrollView>
       <BottomNavbar />
     </>

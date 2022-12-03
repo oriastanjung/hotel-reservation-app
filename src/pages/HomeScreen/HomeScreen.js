@@ -14,12 +14,13 @@ import TopHotelCard from "../../components/TopHotelCard/TopHotelCard";
 import Card from "../../components/Card/Card";
 import ButtonComponent from "../../components/Button/Button";
 import colors from "../../consts/color";
-import hotels from "../../consts/hotels";
+// import hotels from "../../consts/hotels";
 import { Ionicons } from "@expo/vector-icons";
 import styles from "./HomeScreen.styles";
 import InputDate from "../../components/InputDate/InputDate";
 import { useNavigation } from "@react-navigation/native";
 import BottomNavbar from "../../components/BottomNavbar/BottomNavbar";
+
 const { width } = Dimensions.get("screen");
 const cardWidth = width / 1.8;
 
@@ -36,9 +37,16 @@ const HomeScreen = () => {
     showEnd,
     showStart,
     pressed,
+    people,
+    setpeople,
     setPressed,
     showDatepickerEnd,
     showDatepickerStart,
+    hotels,
+    popular,
+    location,
+    setLocation,
+    handleToSearch,
   } = useHomeScreen();
 
   return (
@@ -62,13 +70,14 @@ const HomeScreen = () => {
             </View>
           </View>
         </View>
-
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.searcInput}>
             <Ionicons name="search" size={30} style={{ marginLeft: 20 }} />
             <TextInput
               placeholder="Where Do You Want To go ?"
               style={{ fontSize: 20, paddingLeft: 10 }}
+              value={location}
+              onChangeText={setLocation}
             />
           </View>
 
@@ -95,6 +104,8 @@ const HomeScreen = () => {
             <TextInput
               placeholder="Guest ?"
               style={{ fontSize: 18, paddingLeft: 10 }}
+              value={people}
+              onChangeText={setpeople}
             />
             {/* <Ionicons name="arrow-up" style={{ margin:10 }} size={30}/>
             <Ionicons name="arrow-down" style={{ margin:10 }} size={30}/> */}
@@ -104,7 +115,7 @@ const HomeScreen = () => {
             <ButtonComponent
               text={"Search"}
               isPrimary
-              onPress={() => navigation.navigate("Search Screen Page")}
+              onPress={handleToSearch}
             />
           </View>
 
@@ -117,37 +128,43 @@ const HomeScreen = () => {
                 paddingHorizontal: 20,
               }}
             >
-              City In Indonesia
+              Hotels In Indonesia
             </Text>
-            <Animated.FlatList
-              onMomentumScrollEnd={(e) => {
-                setActiveCardIndex(
-                  Math.round(e.nativeEvent.contentOffset.x / cardWidth)
-                );
-              }}
-              onScroll={Animated.event(
-                [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-                { useNativeDriver: true }
-              )}
-              horizontal
-              data={hotels}
-              contentContainerStyle={{
-                paddingVertical: 30,
-                paddingLeft: 20,
-                paddingRight: cardWidth / 2 - 40,
-              }}
-              showsHorizontalScrollIndicator={false}
-              renderItem={({ item, index }) => (
-                <Card
-                  onPress={() => navigation.navigate("Details")}
-                  hotel={item}
-                  index={index}
-                  activeCardIndex={activeCardIndex}
-                  scrollX={scrollX}
-                />
-              )}
-              snapToInterval={cardWidth}
-            />
+            {hotels && (
+              <Animated.FlatList
+                onMomentumScrollEnd={(e) => {
+                  setActiveCardIndex(
+                    Math.round(e.nativeEvent.contentOffset.x / cardWidth)
+                  );
+                }}
+                onScroll={Animated.event(
+                  [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+                  { useNativeDriver: true }
+                )}
+                horizontal
+                data={hotels}
+                contentContainerStyle={{
+                  paddingVertical: 30,
+                  paddingLeft: 20,
+                  paddingRight: cardWidth / 2 - 40,
+                }}
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item, index }) => (
+                  <Card
+                    onPress={() =>
+                      navigation.navigate("Details", {
+                        hotelid_ppn: item.hotelid_ppn,
+                      })
+                    }
+                    hotel={item}
+                    index={index}
+                    activeCardIndex={activeCardIndex}
+                    scrollX={scrollX}
+                  />
+                )}
+                snapToInterval={cardWidth}
+              />
+            )}
           </View>
 
           <View>
@@ -161,23 +178,20 @@ const HomeScreen = () => {
             >
               Popular Destinations
             </Text>
-
-            <FlatList
-              data={hotels}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{
-                paddingLeft: 20,
-                marginTop: 20,
-                paddingBottom: 30,
-              }}
-              renderItem={({ item }) => (
-                <TopHotelCard
-                  hotel={item}
-                  onPress={() => navigation.navigate("Details")}
-                />
-              )}
-            />
+            {popular && console.log("popular >> ", popular)}
+            {popular && (
+              <FlatList
+                data={popular}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{
+                  paddingLeft: 20,
+                  marginTop: 20,
+                  paddingBottom: 30,
+                }}
+                renderItem={({ item }) => <TopHotelCard hotel={item} />}
+              />
+            )}
           </View>
         </ScrollView>
       </SafeAreaView>

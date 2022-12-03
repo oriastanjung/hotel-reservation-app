@@ -9,13 +9,14 @@ import BottomNavbar from "../../components/BottomNavbar/BottomNavbar";
 
 const ProfilePage = ({ navigation }) => {
   const {
-    emailState,
+    phoneNumberState,
     firstNameState,
     lastNameState,
-    setemailState,
+    setphoneNumberState,
     setfirstNameState,
     setlastNameState,
     handleChangeAccountData,
+    logoutHandler,
   } = useProfilePage(navigation);
   return (
     <>
@@ -36,10 +37,10 @@ const ProfilePage = ({ navigation }) => {
               onChangeText={setlastNameState}
             />
             <InputWithLabel
-              label={"Email"}
-              placeholder={"Input your Email"}
-              value={emailState}
-              onChangeText={setemailState}
+              label={"Phone Number"}
+              placeholder={"Input your Phone Number"}
+              value={phoneNumberState}
+              onChangeText={setphoneNumberState}
             />
           </View>
           <View style={styles.change}>
@@ -51,11 +52,7 @@ const ProfilePage = ({ navigation }) => {
           </View>
         </ProfileCard>
         <View style={styles.btn}>
-          <Button
-            text={"Logout"}
-            isWarning
-            onPress={() => navigation.navigate("Login Page")}
-          />
+          <Button text={"Logout"} isWarning onPress={logoutHandler} />
         </View>
       </View>
       <BottomNavbar />

@@ -40,10 +40,13 @@ const Card = ({ hotel, index, activeCardIndex, scrollX, onPress }) => {
         <Animated.View style={{ ...styles.cardOverLay, opacity }} />
         <View style={styles.location}>
           <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-            {hotel.location}
+            {hotel.hotel_name}
           </Text>
+          <Image
+            source={{ uri: `https://${hotel.thumbnail}` }}
+            style={styles.cardImage}
+          />
         </View>
-        <Image source={{ uri: `${hotel.image}` }} style={styles.cardImage} />
       </Animated.View>
     </TouchableOpacity>
   );
