@@ -39,13 +39,21 @@ const Card = ({ hotel, index, activeCardIndex, scrollX, onPress }) => {
       <Animated.View style={{ ...styles.card, transform: [{ scale }] }}>
         <Animated.View style={{ ...styles.cardOverLay, opacity }} />
         <View style={styles.location}>
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-            {hotel.hotel_name}
-          </Text>
           <Image
             source={{ uri: `https://${hotel.thumbnail}` }}
             style={styles.cardImage}
+            resizeMode={"stretch"}
           />
+          <Text
+            style={{
+              fontSize: 17,
+              fontWeight: "bold",
+              paddingHorizontal: 10,
+              paddingBottom: 15,
+            }}
+          >
+            {hotel.hotel_name}
+          </Text>
         </View>
       </Animated.View>
     </TouchableOpacity>
