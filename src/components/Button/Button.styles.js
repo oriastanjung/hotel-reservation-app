@@ -19,6 +19,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "sans-serif-light",
   },
+  warning: {
+    backgroundColor: "#FB2576",
+    borderColor: "#D23369",
+  },
+  textWarning: {
+    color: "white",
+  },
 });
 
 export default styles;

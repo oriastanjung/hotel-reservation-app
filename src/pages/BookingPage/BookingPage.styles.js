@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     margin: 15,
+    marginBottom: 40,
   },
   textTitle: {
     textTransform: "uppercase",
