@@ -24,7 +24,7 @@ export default function App() {
       <PersistGate persistor={persistor}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName={"Login Page"}>
-            <Stack.Screen name="Home" component={Home} />
+            {/* <Stack.Screen name="Home" component={Home} /> */}
             <Stack.Screen
               name="Login Page"
               component={LoginPage}

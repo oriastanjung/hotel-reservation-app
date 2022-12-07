@@ -16,7 +16,7 @@ const CardSearch = ({ data, checkin, checkout, onPress }) => {
         style={style.headerImage}
         source={{ uri: `https://${data.thumbnail}` }}
       >
-        <View style={style.header}>
+        {/* <View style={style.header}>
           <Ionicons
             name="arrow-back"
             size={28}
@@ -24,7 +24,7 @@ const CardSearch = ({ data, checkin, checkout, onPress }) => {
             onPress={navigation.goBack}
           />
           <Ionicons name="heart-circle" size={28} color={colors.primary} />
-        </View>
+        </View> */}
       </ImageBackground>
 
       <View>

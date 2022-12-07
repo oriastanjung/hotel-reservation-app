@@ -38,7 +38,9 @@ const BookingPage = ({ navigation }) => {
   const CheckoutHandler = () => {
     Alert.alert(
       "Checkout Now?",
-      `You will be book hotel of ${hotelData.name} for ${days} days with Total Price $${price}`,
+      `You will be book hotel of ${
+        hotelData.name
+      } for ${days} days with Total Price $${price * days}`,
       [
         {
           text: "Cancel",
